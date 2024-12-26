@@ -19,7 +19,7 @@ class SplashScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "🎥 Movie Explorer",
+                    "🎥 Movie Explorer!",
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
