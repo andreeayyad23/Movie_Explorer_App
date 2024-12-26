@@ -16,7 +16,7 @@ class CustomCarouselSlider extends StatelessWidget {
     if (data.results.isEmpty) {
       return Center(
         child: Text(
-          'No Movies Available at the moment',
+          'No Movies Available at the moment!',
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
