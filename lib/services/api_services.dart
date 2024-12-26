@@ -23,7 +23,7 @@ class ApiServices {
       log("Success");
       return UpcomingMovieModel.fromJson(jsonDecode(response.body));
     }
-    throw Exception('Failed to load upcoming movies');
+    throw Exception('Failed to load upcoming movies!');
   }
 
   Future<UpcomingMovieModel> getNowPlayingMovies() async {
