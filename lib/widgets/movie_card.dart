@@ -71,7 +71,7 @@ class MovieCard extends StatelessWidget {
           );
         } else {
           return Center(
-            child: Text('No results found.'),
+            child: Text('No results found!'),
           );
         }
       },
