@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 class DescribeModel {
   bool adult;
