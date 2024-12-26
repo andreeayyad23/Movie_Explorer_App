@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:movie_explorer_app/models/describe_model.dart';
 
 class UpcomingMovieModel {
     Dates dates;
