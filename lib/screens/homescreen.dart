@@ -16,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _scrollController = ScrollController();
   late Future<UpcomingMovieModel> upcomingFuture;
   // ignore: non_constant_identifier_names
   late Future<UpcomingMovieModel> NowplayingFuture;
