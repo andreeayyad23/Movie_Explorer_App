@@ -154,3 +154,4 @@ class _MovieDetailedScreenState extends State<MovieDetailedScreen> {
     );
   }
 }
+}
