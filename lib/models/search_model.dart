@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 class SearchModel {
     int page;
