@@ -7,6 +7,7 @@ import 'package:movie_explorer_app/services/api_services.dart';
 import 'package:movie_explorer_app/widgets/custom_carousel.dart';
 import 'package:movie_explorer_app/widgets/movie_card.dart';
 
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -15,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _scrollController = ScrollController();
   late Future<UpcomingMovieModel> upcomingFuture;
   // ignore: non_constant_identifier_names
   late Future<UpcomingMovieModel> NowplayingFuture;
