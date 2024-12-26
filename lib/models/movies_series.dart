@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:movie_explorer_app/common/utils.dart';
 
 class MovieModel {
     int page;
