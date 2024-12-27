@@ -65,7 +65,7 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.only(top: 5.0), // Add 5px margin at the top
+          padding: const EdgeInsets.only(top: 5.0),
           child: Column(
             children: [
               CupertinoSearchTextField(

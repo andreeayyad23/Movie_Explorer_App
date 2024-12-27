@@ -45,7 +45,7 @@ class CustomCarouselSlider extends StatelessWidget {
                   fit: BoxFit.cover,
                   width: double.infinity, // Full width
                   height: MediaQuery.of(context).size.height *
-                      0.25, // Responsive height
+                      0.25, // Reasponsive height
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(), // Loading indicator
                   ),

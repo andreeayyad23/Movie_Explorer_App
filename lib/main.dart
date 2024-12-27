@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)
             .copyWith(surface: Colors.black),
-        useMaterial3: true,
+        useMaterial3: true, //Material Design for 3 Features
         fontFamily: GoogleFonts.ptSans().fontFamily,
         textTheme: TextTheme(
           bodyLarge: const TextStyle(
