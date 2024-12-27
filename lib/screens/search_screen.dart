@@ -38,6 +38,9 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   @override
+  /// This method is guaranteed to be called when the StatefulWidget is
+  /// disposed of.
+  
   void dispose() {
     searchController.dispose();
     super.dispose();
