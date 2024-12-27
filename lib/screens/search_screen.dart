@@ -158,8 +158,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                   .size
                                                   .width *
                                               0.04,
-                                          color: Colors
-                                              .white,
+                                          color: Colors.white,
                                         ),
                                         overflow: TextOverflow.ellipsis,
                                       ),
