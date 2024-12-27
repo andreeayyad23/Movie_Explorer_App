@@ -7,7 +7,6 @@ import 'package:movie_explorer_app/services/api_services.dart';
 import 'package:movie_explorer_app/widgets/custom_carousel.dart';
 import 'package:movie_explorer_app/widgets/movie_card.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -67,14 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
               print('Search button pressed');
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.favorite),
-            tooltip: 'Favorites',
-            color: Colors.white,
-            onPressed: () {
-              print('Favorite button pressed');
             },
           ),
         ],
