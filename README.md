@@ -23,15 +23,16 @@ The Movie Explorer App is a responsive and user-friendly application that allows
 2. Black
 
 ## 🌟 Features of the Movie Explorer App:
-1. **🏠 Home Screen**: Features a dynamic layout showcasing the Upcoming Movies, Now Playing, and Top Rated sections, complemented by a convenient Search icon for easy navigation and movie discovery.
-2. **🎬 Top Rated Section**: Displays a curated list of movies with their titles, images, and ratings, offering users quick access to the most popular and highly rated films.
-3. **📱 Movie Browsing**: Users can browse movies on the mobile app.
-4. **🔍 Search Functionality**: Users can enter the title of the movie they are looking for, and they will see real-time updates as they type. An 'X' button is available to reset the search results.
-5. **⏳ Loading Indicator**: Displayed while data is being fetched, with a 'No results found' message when the search yields no matches.
-6. **🚫 Error Handling**: If the requested model is not available in the API or if there is an error, the user will be redirected to a 'Not Found' page. Clicking this page will redirect them back to the home screen.
-7. **📡 API Integration**: Fetching information via the API.
-8. **📖 Detailed Movie Information**: The user can view detailed information about each movie, including the image, title, overview, rating, and release date. They can easily return to the home screen when finished browsing.
-9. **💻 Perfect UI**: Adapts beautifully to different devices, providing an intuitive and visually appealing interface.
+1. **🖼️ Splash Screen**: Added a visually engaging splash screen to create a captivating first impression, featuring seamless transitions and branding elements for an enhanced user experience.
+2. **🏠 Home Screen**: Features a dynamic layout showcasing the Upcoming Movies, Now Playing, and Top Rated sections, complemented by a convenient Search icon for easy navigation and movie discovery.
+3. **🎬 Top Rated Section**: Displays a curated list of movies with their titles, images, and ratings, offering users quick access to the most popular and highly rated films.
+4. **📱 Movie Browsing**: Users can browse movies on the mobile app.
+5. **🔍 Search Functionality**: Users can enter the title of the movie they are looking for, and they will see real-time updates as they type. An 'X' button is available to reset the search results.
+6. **⏳ Loading Indicator**: Displayed while data is being fetched, with a 'No results found' message when the search yields no matches.
+7. **🚫 Error Handling**: If the requested model is not available in the API or if there is an error, the user will be redirected to a 'Not Found' page. Clicking this page will redirect them back to the home screen.
+8. **📡 API Integration**: Fetching information via the API.
+9. **📖 Detailed Movie Information**: The user can view detailed information about each movie, including the image, title, overview, rating, and release date. They can easily return to the home screen when finished browsing.
+10. **💻 Perfect UI**: Adapts beautifully to different devices, providing an intuitive and visually appealing interface.
 
 ## 🚀 Setup Instructions
 
