@@ -135,14 +135,28 @@ class _SearchScreenState extends State<SearchScreen> {
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => MovieDetailedScreen(
-                                        movieId: searchModel!.results[index].id,
+                                  if (hasError) {
+                                    // Show an error message if there's an error
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                            'Failed to load details. Please try again later.'),
+                                        backgroundColor: Colors.red,
                                       ),
-                                    ),
-                                  );
+                                    );
+                                  } else {
+                                    // Navigate to the detailed screen if no error
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            MovieDetailedScreen(
+                                          movieId:
+                                              searchModel!.results[index].id,
+                                        ),
+                                      ),
+                                    );
+                                  }
                                 },
                                 child: Column(
                                   children: [
@@ -158,8 +172,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                       child: Text(
                                         searchModel!.results[index].title,
                                         style: TextStyle(
-                                          fontSize:
-                                              20.0, // Set a fixed font size
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.04,
                                           color: Colors.white,
                                         ),
                                         overflow: TextOverflow.ellipsis,
