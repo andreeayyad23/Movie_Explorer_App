@@ -38,9 +38,10 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   @override
+
   /// This method is guaranteed to be called when the StatefulWidget is
   /// disposed of.
-  
+
   void dispose() {
     searchController.dispose();
     super.dispose();
@@ -157,10 +158,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                       child: Text(
                                         searchModel!.results[index].title,
                                         style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.04,
+                                          fontSize:
+                                              20.0, // Set a fixed font size
                                           color: Colors.white,
                                         ),
                                         overflow: TextOverflow.ellipsis,
