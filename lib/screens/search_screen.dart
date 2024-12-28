@@ -63,7 +63,7 @@ class _SearchScreenState extends State<SearchScreen> {
             'Search Movies',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 24.0, // Fixed font size
+              fontSize: 17.0, // Fixed font size
               fontWeight: FontWeight.bold,
             ),
           ),
