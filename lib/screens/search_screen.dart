@@ -38,10 +38,6 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   @override
-
-  /// This method is guaranteed to be called when the StatefulWidget is
-  /// disposed of.
-
   void dispose() {
     searchController.dispose();
     super.dispose();
@@ -63,7 +59,7 @@ class _SearchScreenState extends State<SearchScreen> {
             'Search Movies',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 17.0, // Fixed font size
+              fontSize: 17.0, // Fixed font size of 17px
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -171,16 +167,13 @@ class _SearchScreenState extends State<SearchScreen> {
                                     Flexible(
                                       child: Text(
                                         searchModel!.results[index].title,
-                                        style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.04,
+                                        style: const TextStyle(
+                                          fontSize: 17.0, // Fixed font size of 17px
                                           color: Colors.white,
                                         ),
                                         overflow: TextOverflow.ellipsis,
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               );
