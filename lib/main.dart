@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_explorer_app/screens/splash_screen.dart';
 
-Future<void> main() async {
-  await dotenv.load(); 
+void main() {
   runApp(const MyApp());
 }
 
