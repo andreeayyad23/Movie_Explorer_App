@@ -1,4 +1,4 @@
-lib/common/utils.dart
+lib/common/*.dart
 # Miscellaneous
 *.class
 *.log
