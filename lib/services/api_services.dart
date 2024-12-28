@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:movie_explorer_app/common/utils.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movie_explorer_app/models/describe_model.dart';
 import 'package:movie_explorer_app/models/movies_series.dart';
 import 'package:movie_explorer_app/models/search_model.dart';
@@ -9,7 +9,7 @@ import 'package:movie_explorer_app/models/upcoming_model.dart';
 import 'package:http/http.dart' as http;
 
 const String baseUrl = 'https://api.themoviedb.org/3/';
-var key = "?api_key=$apikey";
+String key = "?api_key=${dotenv.env['API_KEY']}";
 late String endpoint;
 
 class ApiServices {
@@ -58,7 +58,9 @@ class ApiServices {
     print("search url $url");
 
     final response = await http.get(Uri.parse(url), headers: {
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYjg4YTZhMWYwM2E5YzY5NWFjMTQzY2FlNDJiZDkyYiIsIm5iZiI6MTczNDk1NTUxMS4xMTksInN1YiI6IjY3Njk1MWY3NTdmNmE2N2M4NTVjZTkxNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ujXY6aUQSojkU5t_PGPeTF1x2D1S8c-WJH3wy_UImMw'});
+      'Authorization':
+          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYjg4YTZhMWYwM2E5YzY5NWFjMTQzY2FlNDJiZDkyYiIsIm5iZiI6MTczNDk1NTUxMS4xMTksInN1YiI6IjY3Njk1MWY3NTdmNmE2N2M4NTVjZTkxNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ujXY6aUQSojkU5t_PGPeTF1x2D1S8c-WJH3wy_UImMw'
+    });
 
     if (response.statusCode == 200) {
       log("Success");
@@ -67,12 +69,14 @@ class ApiServices {
     throw Exception('Failed to load search movies');
   }
 
-   Future<DescribeModel> getMovieDetails(int movieId) async {
+  Future<DescribeModel> getMovieDetails(int movieId) async {
     endpoint = "movie/$movieId";
     final url = "$baseUrl$endpoint$key";
     print("search url $url");
 
-    final response = await http.get(Uri.parse(url),);
+    final response = await http.get(
+      Uri.parse(url),
+    );
 
     if (response.statusCode == 200) {
       log("Success");
