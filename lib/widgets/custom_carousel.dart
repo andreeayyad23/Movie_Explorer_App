@@ -12,7 +12,6 @@ class CustomCarouselSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    // If the movie data is empty, show the 'No Movies' message
     if (data.results.isEmpty) {
       return Center(
         child: Text(
@@ -36,26 +35,22 @@ class CustomCarouselSlider extends StatelessWidget {
 
           return GestureDetector(
             child: Column(
-              crossAxisAlignment:
-                  CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Cached image with responsive height and width
                 CachedNetworkImage(
                   imageUrl: '$imageUrl$url',
                   fit: BoxFit.cover,
-                  width: double.infinity, // Full width
-                  height: MediaQuery.of(context).size.height *
-                      0.25, // Reasponsive height
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height * 0.25,
                   placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(), // Loading indicator
+                    child: CircularProgressIndicator(),
                   ),
                   errorWidget: (context, url, error) => const Icon(
-                    Icons.error, // Error icon for failed image loading
+                    Icons.error,
                     color: Colors.red,
                   ),
                 ),
-                const SizedBox(height: 20), // Space between image and text
-                // Movie title with emoji
+                const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
@@ -64,7 +59,7 @@ class CustomCarouselSlider extends StatelessWidget {
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
-                    overflow: TextOverflow.ellipsis, // Prevent text overflow
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Padding(
@@ -75,7 +70,7 @@ class CustomCarouselSlider extends StatelessWidget {
                       fontSize: 14,
                       color: Colors.grey,
                     ),
-                    overflow: TextOverflow.ellipsis, // Prevent text overflow
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],

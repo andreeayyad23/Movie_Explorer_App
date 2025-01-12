@@ -3,78 +3,84 @@ import 'package:movie_explorer_app/common/utils.dart';
 import 'package:movie_explorer_app/models/upcoming_model.dart';
 
 class MovieCard extends StatelessWidget {
-  final Future<UpcomingMovieModel> future;
+  final UpcomingMovieModel? movies;
   final String headLineText;
+  final Function(int) onMovieTap;
+  final int crossAxisCount;
 
-  const MovieCard(
-      {super.key,
-      required this.future,
-      required this.headLineText,
-      required Null Function(dynamic movieId) onMovieTap});
+  const MovieCard({
+    super.key,
+    required this.movies,
+    required this.headLineText,
+    required this.onMovieTap,
+    this.crossAxisCount = 3,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: future,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (snapshot.hasError) {
-          return Center(
-            child: Text('Error: ${snapshot.error}'),
-          );
-        } else if (snapshot.hasData && snapshot.data?.results != null) {
-          var data = snapshot.data!.results;
+    if (movies == null || movies!.results.isEmpty) {
+      return Center(
+        child: Text(
+          'No Movies Available at the moment!',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.grey,
+          ),
+        ),
+      );
+    }
 
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                headLineText,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 20),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: data.length,
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            headLineText,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+        ),
+        Expanded(
+          child: GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 160, // Maximum width per item
+              mainAxisSpacing: 8, // Space between items on the main axis
+              crossAxisSpacing: 8, // Space between items on the cross axis
+              childAspectRatio: 3 / 5, // Aspect ratio of each item
+            ),
+            itemCount: movies!.results.length,
+            itemBuilder: (context, index) {
+              final movie = movies!.results[index];
+              return GestureDetector(
+                onTap: () => onMovieTap(movie.id),
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage('$imageUrl${movie.posterPath}'),
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      movie.title,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
                       ),
-                      child: Image.network(
-                        "$imageUrl${data[index].posterPath}",
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return Center(
-                            child: CircularProgressIndicator(
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                      (loadingProgress.expectedTotalBytes ?? 1)
-                                  : null,
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
-              ),
-            ],
-          );
-        } else {
-          return Center(
-            child: Text('No results found!'),
-          );
-        }
-      },
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

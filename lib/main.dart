@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_explorer_app/provider/movie_details_provider.dart';
+import 'package:movie_explorer_app/provider/movie_provider.dart';
+import 'package:movie_explorer_app/provider/search_provider.dart';
 import 'package:movie_explorer_app/screens/splash_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   await dotenv.load(); // Load environment variables
-  runApp(const MyApp());
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => MoviesProvider()),
+        ChangeNotifierProvider(create: (_) => SearchProvider()),
+        ChangeNotifierProvider(create: (_) => MovieDetailsProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -20,14 +34,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)
             .copyWith(surface: Colors.black),
-        useMaterial3: true, //Material Design for 3 Features
+        useMaterial3: true, // Material Design for 3 Features
         fontFamily: GoogleFonts.ptSans().fontFamily,
-        textTheme: TextTheme(
-          bodyLarge: const TextStyle(
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(
             color: Colors.white,
             fontSize: 24,
           ),
-          bodyMedium: const TextStyle(
+          bodyMedium: TextStyle(
             color: Colors.white,
             fontSize: 20,
           ),

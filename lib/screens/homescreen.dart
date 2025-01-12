@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:movie_explorer_app/models/movies_series.dart';
-import 'package:movie_explorer_app/models/upcoming_model.dart';
+import 'package:movie_explorer_app/provider/movie_provider.dart';
 import 'package:movie_explorer_app/screens/movie_detailed_screen.dart';
 import 'package:movie_explorer_app/screens/search_screen.dart';
-import 'package:movie_explorer_app/services/api_services.dart';
 import 'package:movie_explorer_app/widgets/custom_carousel.dart';
 import 'package:movie_explorer_app/widgets/movie_card.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,27 +14,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Future<UpcomingMovieModel> upcomingFuture;
-  // ignore: non_constant_identifier_names
-  late Future<UpcomingMovieModel> NowplayingFuture;
-  late Future<MovieModel> topRatedMovies;
-
-  ApiServices apiServices = ApiServices();
   @override
   void initState() {
     super.initState();
-    upcomingFuture = apiServices.getUpcomingMovies();
-    NowplayingFuture = apiServices.getNowPlayingMovies();
-    topRatedMovies = apiServices.getTopRatedMovies();
+    // Fetch movies when the screen is initialized
+    Provider.of<MoviesProvider>(context, listen: false).fetchMoviesData();
   }
 
   @override
   Widget build(BuildContext context) {
+    final moviesProvider = Provider.of<MoviesProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
           children: [
-            Icon(
+            const Icon(
               Icons.movie,
               size: 28,
               color: Colors.white,
@@ -73,22 +67,14 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            FutureBuilder(
-              future: topRatedMovies,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return CustomCarouselSlider(
-                    data: snapshot.data!,
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
-              },
-            ),
+            if (moviesProvider.topRatedMovies != null)
+              CustomCarouselSlider(
+                data: moviesProvider.topRatedMovies!,
+              ),
             SizedBox(
               height: 220,
               child: MovieCard(
-                future: NowplayingFuture,
+                movies: moviesProvider.nowPlayingMovies,
                 headLineText: "Now Playing Movies",
                 onMovieTap: (movieId) {
                   Navigator.push(
@@ -102,9 +88,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             SizedBox(
-              height: 220,
+              height: 220, // Fixed height for Upcoming Movies
               child: MovieCard(
-                future: upcomingFuture,
+                movies: moviesProvider.upcomingMovies,
                 headLineText: "Upcoming Movies",
                 onMovieTap: (movieId) {
                   Navigator.push(

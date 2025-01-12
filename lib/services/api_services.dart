@@ -84,4 +84,6 @@ class ApiServices {
     }
     throw Exception('Failed to load Describe movies');
   }
+
+  getPopularMovies() {}
 }

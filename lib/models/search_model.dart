@@ -37,6 +37,8 @@ class SearchModel {
         totalResults: json["total_results"],
     );
 
+  get query => null;
+
     Map<String, dynamic> toJson() => {
         "page": page,
         "results": List<dynamic>.from(results.map((x) => x.toJson())),
