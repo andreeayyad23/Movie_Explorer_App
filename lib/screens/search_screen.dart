@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_explorer_app/common/utils.dart';
 import 'package:movie_explorer_app/models/search_model.dart';
+import 'package:movie_explorer_app/screens/favorite_screen.dart';
 import 'package:movie_explorer_app/screens/movie_detailed_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:movie_explorer_app/provider/search_provider.dart';
+import 'package:movie_explorer_app/provider/favorite_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -26,6 +28,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final searchProvider = Provider.of<SearchProvider>(context);
+    final favoriteProvider = Provider.of<FavoriteProvider>(context);
 
     return SafeArea(
       child: Scaffold(
@@ -45,6 +48,19 @@ class _SearchScreenState extends State<SearchScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.favorite, color: Colors.red),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FavoriteScreen(),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.only(top: 5.0),
@@ -112,6 +128,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                         .searchModel?.results.length ??
                                     0,
                                 itemBuilder: (context, index) {
+                                  final movie = searchProvider.searchModel!.results[index];
                                   return GestureDetector(
                                     onTap: () {
                                       if (searchProvider.hasError) {
@@ -129,10 +146,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 MovieDetailedScreen(
-                                              movieId: searchProvider
-                                                  .searchModel!
-                                                  .results[index]
-                                                  .id,
+                                              movieId: movie.id,
                                             ),
                                           ),
                                         );
@@ -140,18 +154,36 @@ class _SearchScreenState extends State<SearchScreen> {
                                     },
                                     child: Column(
                                       children: [
-                                        CachedNetworkImage(
-                                          imageUrl:
-                                              "$imageUrl${searchProvider.searchModel!.results[index].posterPath}",
-                                          placeholder: (context, url) =>
-                                              const CircularProgressIndicator(),
-                                          errorWidget: (context, url, error) =>
-                                              const Icon(Icons.error),
+                                        Stack(
+                                          children: [
+                                            CachedNetworkImage(
+                                              imageUrl:
+                                                  "$imageUrl${movie.posterPath}",
+                                              placeholder: (context, url) =>
+                                                  const CircularProgressIndicator(),
+                                              errorWidget: (context, url, error) =>
+                                                  const Icon(Icons.error),
+                                            ),
+                                            Positioned(
+                                              top: 5,
+                                              right: 5,
+                                              child: IconButton(
+                                                icon: Icon(
+                                                  favoriteProvider.isFavorite(movie.id)
+                                                      ? Icons.favorite
+                                                      : Icons.favorite_border,
+                                                  color: Colors.red,
+                                                ),
+                                                onPressed: () {
+                                                  favoriteProvider.toggleFavorite(movie);
+                                                },
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                         Flexible(
                                           child: Text(
-                                            searchProvider.searchModel!
-                                                .results[index].title,
+                                            movie.title,
                                             style: const TextStyle(
                                               fontSize: 17.0,
                                               color: Colors.white,

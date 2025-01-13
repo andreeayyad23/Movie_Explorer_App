@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_explorer_app/provider/favorite_provider.dart';
 import 'package:movie_explorer_app/provider/movie_details_provider.dart';
 import 'package:movie_explorer_app/provider/movie_provider.dart';
 import 'package:movie_explorer_app/provider/search_provider.dart';
@@ -16,6 +17,9 @@ void main() async {
         ChangeNotifierProvider(create: (_) => MoviesProvider()),
         ChangeNotifierProvider(create: (_) => SearchProvider()),
         ChangeNotifierProvider(create: (_) => MovieDetailsProvider()),
+        ChangeNotifierProvider(create: (_) => FavoriteProvider()), // Add FavoriteProvider
+
+
       ],
       child: const MyApp(),
     ),

@@ -66,15 +66,6 @@ class MovieCard extends StatelessWidget {
                       image: NetworkImage('$imageUrl${movie.posterPath}'),
                     ),
                   ),
-                  child: Center(
-                    child: Text(
-                      movie.title,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
                 ),
               );
             },
